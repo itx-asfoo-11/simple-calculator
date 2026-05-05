@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        /* CSS Section */
+        body {
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .calc-container {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+            width: 300px;
+            border: 1px solid #333;
+        }
+        .brand-name {
+            color: #bb86fc;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        #screen {
+            width: 100%;
+            height: 50px;
+            background: #2d2d2d;
+            border: none;
+            color: #03dac6;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            height: 50px;
+            border-radius: 8px;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #444;
+        }
+        .op-btn {
+            background: #3700b3;
+            color: #fff;
+        }
+        .equal-btn {
+            background: #03dac6;
+            color: #000;
+            grid-column: span 2;
+        }
+        .clear-btn {
+            background: #cf6679;
+            color: #000;
+        }
+        .footer {
+            color: #777;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calc-container">
+    <div class="brand-name">SIMPLE CALCULATOR 📠</div>
+    <input type="text" id="screen" readonly placeholder="0">
+    
+    <div class="btn-grid">
+        <button class="clear-btn" onclick="clearScreen()">C</button>
+        <button class="op-btn" onclick="addValue('/')">/</button>
+        <button class="op-btn" onclick="addValue('*')">×</button>
+        <button class="op-btn" onclick="deleteLast()">⌫</button>
+
+        <button onclick="addValue('7')">7</button>
+        <button onclick="addValue('8')">8</button>
+        <button onclick="addValue('9')">9</button>
+        <button class="op-btn" onclick="addValue('-')">-</button>
+
+        <button onclick="addValue('4')">4</button>
+        <button onclick="addValue('5')">5</button>
+        <button onclick="addValue('6')">6</button>
+        <button class="op-btn" onclick="addValue('+')">+</button>
+
+        <button onclick="addValue('1')">1</button>
+        <button onclick="addValue('2')">2</button>
+        <button onclick="addValue('3')">3</button>
+        <button class="equal-btn" onclick="calculateResult()">=</button>
+
+        <button onclick="addValue('0')" style="grid-column: span 2;">0</button>
+        <button onclick="addValue('.')">.</button>
+    </div>
+    
+    <div class="footer">THANKS FOR USING 🤗💜</div>
+</div>
+
+<script>
+    // JavaScript Section
+    let screen = document.getElementById('screen');
+
+    function addValue(val) {
+        screen.value += val;
+    }
+
+    function clearScreen() {
+        screen.value = "";
+    }
+
+    function deleteLast() {
+        screen.value = screen.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+        try {
+            let expression = screen.value;
+            // Agar screen khali ho to kuch na kare
+            if (expression === "") return;
+
+            // Yahan hum browser ka built-in math engine use kar rahe hain
+            // Jo aapke C++ ke switch(a) wala kaam logicly perform karta hai
+            let finalAns = eval(expression);
+            
+            if (finalAns === Infinity) {
+                screen.value = "Invalid❌";
+            } else {
+                screen.value = finalAns;
+            }
+        } catch (err) {
+            screen.value = "Error❌";
+        }
+    }
+</script>
+
+</body>
+</html>
