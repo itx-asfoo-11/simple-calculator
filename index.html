@@ -135,11 +135,10 @@
     function calculateResult() {
         try {
             let expression = screen.value;
-            // Agar screen khali ho to kuch na kare
+            // If Screen is empty, no operations wil be performed
             if (expression === "") return;
 
-            // Yahan hum browser ka built-in math engine use kar rahe hain
-            // Jo aapke C++ ke switch(a) wala kaam logicly perform karta hai
+            // Here we are using math built-in engine of JavaScript to evaluate the expression
             let finalAns = eval(expression);
             
             if (finalAns === Infinity) {
